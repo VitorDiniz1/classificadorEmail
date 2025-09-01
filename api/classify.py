@@ -6,7 +6,9 @@ from flask_cors import CORS
 import requests
 
 load_dotenv()
-app = Flask(__name__, static_folder="frontend")
+
+frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
+app = Flask(__name__, static_folder=frontend_dir)
 CORS(app)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
