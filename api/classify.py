@@ -7,8 +7,7 @@ import requests
 
 load_dotenv()
 
-frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
-app = Flask(__name__, static_folder=frontend_dir)
+app = Flask(__name__, static_folder="../frontend")
 CORS(app)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -77,15 +76,11 @@ def process_email_with_gemini(email_content):
         print(f"Erro na requisição à API do Gemini: {e}")
         return None
 
-@app.route("/")
-def serve_index():
-    """Serve o arquivo principal index.html."""
-    return send_from_directory(app.static_folder, "index.html")
-
-@app.route("/<path:filename>")
-def serve_static(filename):
-    """Serve todos os outros arquivos estáticos (CSS, JS, etc.)."""
-    return send_from_directory(app.static_folder, filename)
+@app.route("/", defaults={"path": "index.html"})
+@app.route("/<path:path>")
+def serve_static(path):
+    """Rota para servir os arquivos estáticos (HTML, CSS, JS) do frontend."""
+    return send_from_directory(app.static_folder, path)
 
 @app.route("/api/classify", methods=["POST"])
 def classify_email():
