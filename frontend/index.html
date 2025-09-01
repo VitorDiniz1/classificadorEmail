@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Classificador de E-mails</title>
+</head>
+
+<body>
+    <header>Classificador de E-mails</header>
+
+    <div class="container">
+        <h2>Insira seu E-mail</h2>
+
+        <div class="file-input-container">
+            <input type="file" id="fileInput" accept=".txt,.pdf">
+        </div>
+
+        <div id="fileInfo" class="file-selected" style="display: none;">
+            <span id="fileName"></span>
+            <button class="remove-file" id="removeFile">×</button>
+        </div>
+
+        <textarea id="emailText" rows="6" placeholder="Cole o conteúdo do e-mail aqui..."></textarea>
+
+        <button id="classify-btn">Classificar E-mail</button>
+
+        <div id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <span>Processando...</span>
+        </div>
+
+        <div class="result" id="result">
+            <p class="category" id="categoria"></p>
+            <p class="response" id="resposta"></p>
+
+            <div class="action-buttons">
+                <button class="button-secondary" onclick="novaAnalise()">Nova Análise</button>
+                <button class="button-secondary" onclick="limparTudo()">Limpar Tudo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
